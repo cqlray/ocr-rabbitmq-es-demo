@@ -1,0 +1,20 @@
+
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    listener:
+      simple:
+        acknowledge-mode: auto
+        concurrency: 4
+        max-concurrency: 10
+es:
+  cluster-nodes: 127.0.0.1:9200
