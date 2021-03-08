@@ -1,11 +1,11 @@
 package com.jwt.ocrrabbitmqesdemo.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class QueueConfig {
@@ -76,17 +76,11 @@ public class QueueConfig {
      */
     public static final String SUBJECT_ROUTING_KEY = "subject.task";
 
-//    @Bean
-//    public CustomExchange delayExchange() {
-//        Map<String, Object> args = new HashMap<>();
-//        args.put(X_DELAYED_TYPE, EXCHANGE_TYPE);
-//        return new CustomExchange(TASK_EXCHANGE, X_DELAYED_MESSAGE, true, false, args);
-//    }
-
     @Bean
-    public FanoutExchange delayExchange() {
-
-        return new FanoutExchange(TASK_EXCHANGE, true, false);
+    public CustomExchange delayExchange() {
+        Map<String, Object> args = new HashMap<>();
+        args.put(X_DELAYED_TYPE, EXCHANGE_TYPE);
+        return new CustomExchange(TASK_EXCHANGE, X_DELAYED_MESSAGE, true, false, args);
     }
 
     @Bean
@@ -94,14 +88,9 @@ public class QueueConfig {
         return new Queue(SUBJECT_QUEUE, true);
     }
 
-//    @Bean
-//    public Binding subjectBinding() {
-//        return BindingBuilder.bind(subjectQueue()).to(delayExchange())
-//                .with(SUBJECT_ROUTING_KEY).noargs();
-//    }
     @Bean
     public Binding subjectBinding() {
-        return BindingBuilder.bind(subjectQueue()).to(delayExchange());
+        return BindingBuilder.bind(subjectQueue()).to(delayExchange())
+                .with(SUBJECT_ROUTING_KEY).noargs();
     }
-
 }

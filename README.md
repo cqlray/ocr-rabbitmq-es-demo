@@ -32,7 +32,9 @@ docker run -it --rm --name rabbitmq  --net somenetwork -p 5672:5672 -p 15672:156
 ```
 #### 实现延迟队列需要用到插件：[rabbitmq-delayed-message-exchange](https://github.com/rabbitmq/rabbitmq-delayed-message-exchange)
 下载：
+```s
 wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez
+```
 
 存放目录： /plugins/
 
@@ -40,6 +42,25 @@ wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/down
 ```s
 rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 ```
+#### 制作启动了延迟队列插件的镜像
+
+```dockerfile
+FROM rabbitmq:3.8.14-management
+
+#  wget: not found,so download it by yourself
+# RUN wget https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/3.8.9/rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez
+
+COPY ./rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez /plugins/
+
+RUN rabbitmq-plugins enable --offline rabbitmq_delayed_message_exchange
+```
+```s
+# 制作镜像
+docker build -t rabbit-delayed-message -f ./rabbitmq_delayed_message_Dockerfile .
+# 启动
+docker run -it --rm --name rabbitmq  --net somenetwork -p 5672:5672 -p 15672:15672 rabbit-delayed-message
+```
+
 
 ### docker 启动 elasticsearch 和 kibana
 版本： 7.10.1
@@ -54,20 +75,8 @@ docker run -d --name kibana --net somenetwork -p 5601:5601 kibana:7.10.1
 
 ## 实现功能：
 - elasticsearch数据保存和查询（已完成）
-- 消息队列发送和接收，以及延迟消息（消息发送和接收完成，延迟消息未完成，因尚未启用延迟消息插件）
+- 消息队列发送和接收，以及延迟消息（已完成）
 - ocr识别pdf（未开始）
 
 ## todo
-1. 制作启用延迟插件的镜像，因windows下制作会提示目录问题，所以最好下载插件后制作
-
-尚未测试
-```dockerfile
-FROM rabbitmq:3.8.14-management
-COPY ./rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez /plugins/
-
-RUN rabbitmq-plugins enable --offline rabbitmq_delayed_message_exchange
-```
-
-2. 实现延迟消息(把QueueConfig中的注释取消)
-
-3. ocr
+1. ocr识别pdf
