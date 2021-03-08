@@ -1,4 +1,4 @@
-package com.jwt.ocrrabbitmqesdemo.facade.mq.servie;
+package com.jwt.ocrrabbitmqesdemo.service;
 
 public interface MessageQueueSendService {
 

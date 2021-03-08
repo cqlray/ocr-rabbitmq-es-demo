@@ -1,10 +1,13 @@
-package com.jwt.ocrrabbitmqesdemo.service.es.dao;
+package com.jwt.ocrrabbitmqesdemo.dao;
 
-import com.jwt.ocrrabbitmqesdemo.service.es.entity.Archive;
+import com.jwt.ocrrabbitmqesdemo.entity.Archive;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ArchiveDao extends ElasticsearchRepository<Archive, Integer> {
-    Archive findByTm(String tm);
+    List<Archive> findByTm(String tm);
+
 }

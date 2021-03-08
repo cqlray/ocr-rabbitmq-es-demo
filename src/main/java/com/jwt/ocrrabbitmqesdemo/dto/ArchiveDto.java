@@ -1,8 +1,11 @@
-package com.jwt.ocrrabbitmqesdemo.facade.es.dto;
+package com.jwt.ocrrabbitmqesdemo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * 拼音是客户要求的字段，这个demo就不改了
+ */
 @Data
 public class ArchiveDto {
     /**

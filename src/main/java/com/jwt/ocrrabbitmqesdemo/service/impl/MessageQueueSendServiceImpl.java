@@ -1,9 +1,9 @@
-package com.jwt.ocrrabbitmqesdemo.service.mq.impl;
+package com.jwt.ocrrabbitmqesdemo.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.http.ContentType;
 import com.jwt.ocrrabbitmqesdemo.config.QueueConfig;
-import com.jwt.ocrrabbitmqesdemo.facade.mq.servie.MessageQueueSendService;
+import com.jwt.ocrrabbitmqesdemo.service.MessageQueueSendService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

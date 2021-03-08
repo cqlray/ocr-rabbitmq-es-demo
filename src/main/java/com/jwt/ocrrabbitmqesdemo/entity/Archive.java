@@ -1,4 +1,4 @@
-package com.jwt.ocrrabbitmqesdemo.service.es.entity;
+package com.jwt.ocrrabbitmqesdemo.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -6,6 +6,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+/**
+ * 拼音是客户要求的字段，这个demo就不改了
+ */
 @Data
 @Document(indexName = "archives")
 public class Archive {
@@ -18,7 +21,7 @@ public class Archive {
      * 全宗号
      */
     @Field(type = FieldType.Text)
-    private String qzh;
+    private String zh;
     /**
      * 目录号
      */

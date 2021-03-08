@@ -38,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                         LocalDate.class,
                         String.class))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.jwt.ocrrabbitmqesdemo.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.jwt.ocrrabbitmqesdemo.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
