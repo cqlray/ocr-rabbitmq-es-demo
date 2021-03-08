@@ -26,4 +26,16 @@ public class MessageQueueSendServiceImpl implements MessageQueueSendService {
         });
         log.info("archive message send successful");
     }
+
+
+    @Override
+    public void sendDelayMessage(Object msg, Long timeout) {
+        log.info("this message need to send {},send time is {}", msg, DateUtil.now());
+        rabbitTemplate.convertAndSend(QueueConfig.TASK_EXCHANGE, QueueConfig.SUBJECT_ROUTING_KEY, msg, message -> {
+            message.getMessageProperties().setHeader("x-delay", timeout);
+            message.getMessageProperties().setHeader("content_type", ContentType.JSON);
+            return message;
+        });
+        log.info("message send successful");
+    }
 }

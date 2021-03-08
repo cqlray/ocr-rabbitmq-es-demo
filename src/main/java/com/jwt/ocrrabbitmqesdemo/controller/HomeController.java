@@ -1,6 +1,7 @@
 package com.jwt.ocrrabbitmqesdemo.controller;
 
 import com.jwt.ocrrabbitmqesdemo.dto.ArchiveDto;
+import com.jwt.ocrrabbitmqesdemo.dto.SubjectDto;
 import com.jwt.ocrrabbitmqesdemo.service.ArchiveServie;
 import com.jwt.ocrrabbitmqesdemo.service.MessageQueueSendService;
 import io.swagger.annotations.Api;
@@ -48,5 +49,12 @@ public class HomeController {
     @RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
     public void sendArchiveMessage(@RequestBody String message){
         messageQueueSendService.sendArchiveMessage(message);
+    }
+
+
+    @ApiOperation(value = "发送延迟消息到消息队列")
+    @RequestMapping(value = "/sendDelayedMessage", method = RequestMethod.POST)
+    public void sendDelayedMessage(@RequestParam("timeout") @ApiParam("过期时间") Long timeout, @RequestBody SubjectDto subjectDto){
+        messageQueueSendService.sendDelayMessage(subjectDto,timeout);
     }
 }

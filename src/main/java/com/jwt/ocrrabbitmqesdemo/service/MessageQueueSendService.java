@@ -8,4 +8,12 @@ public interface MessageQueueSendService {
      * @param msg 发送的对象
      */
     void sendArchiveMessage(Object msg);
+
+    /**
+     * 发送延迟消息到消息队列
+     *
+     * @param msg        发送的消息
+     * @param timeout    过期时间
+     */
+    void sendDelayMessage(Object msg, Long timeout);
 }
