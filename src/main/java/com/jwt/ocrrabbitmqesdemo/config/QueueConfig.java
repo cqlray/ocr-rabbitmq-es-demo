@@ -47,6 +47,7 @@ public class QueueConfig {
      * **********************
      * 延迟消息
      * **********************
+     * https://github.com/rabbitmq/rabbitmq-delayed-message-exchange
      */
 
     /**
