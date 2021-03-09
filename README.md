@@ -14,6 +14,7 @@ https://start.spring.io/
 - Spring Web
 - Spring for RabbitMQ
 - Spring Data Elasticsearch
+- swagger 2.9.2
 
 
 ## docker 配置 rabbitmq、elasticsearch的环境
